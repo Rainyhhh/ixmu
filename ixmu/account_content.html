@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/ui-res.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/ui-input.css">
+        <link rel="stylesheet" href="css/ui-list.css">
+        <link rel="stylesheet" href="css/ui-btn.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <script src="js/zy_control.js">
+        </script>
+        <script src="js/zy_click.js">
+        </script>
+        <script src="js/zy_json.js">
+        </script>
+        <script src="js/zy_icache.js">
+        </script>
+        <script src="js/zy_tmpl.js">
+        </script>
+        <script src="js/ixiada_request.js">
+        </script>
+        <script src='js/ixada_url_config.js'>
+        </script>
+		<script type="text/javascript" src="js/jquery.min.js">
+        </script>
+		<script>
+//			 jQuery(document).ready(function(){
+//				if(localStorage.getItem("flag")) {
+//				var opId = 998;
+//                uexXmlHttpMgr.onData = function(inOpCode, inStatus, inResult){
+//                    if (inStatus == 1) {
+//                        uexXmlHttpMgr.close(opId);
+//                        uexWindow.close();
+//                        
+//                    }
+//                }
+//                uexXmlHttpMgr.open(opId, 'post', ixiada_upload_img, 0);               
+//                uexXmlHttpMgr.setPostData(opId, "0", "x", localStorage.getItem("x"));
+//                uexXmlHttpMgr.setPostData(opId, "0", "y", localStorage.getItem("y"));
+//                uexXmlHttpMgr.setPostData(opId, "0", "w", localStorage.getItem("z"));
+//                uexXmlHttpMgr.setPostData(opId, "0", "screen_width", screen.width);
+//				uexXmlHttpMgr.setPostData(opId, "1", "filename", localStorage.getItem("filename"));
+//                uexXmlHttpMgr.send(opId);
+//				}
+//	
+//        });
+		</script>
+    </head>
+    <body class="um-vp" style="padding-top:3%;font-family:微软雅黑;" ontouchstart>
+        <img src="css/img/background.jpg" style="width:100%;max-height:30%; ">
+        <div style="padding:5%;">
+            <!--列表开始-->
+            <div class=" b-blu  c-wh t-blu">
+                <ul class="  c-m1 ubb ub b-blu t-blu ub-ac lis">
+                    <li class="lis-th ub-img" onclick="choose_pic()">
+                        <img id="head_image" src="css/img/user_default.png" style="border:2px thick; width:80%; height:"><input type='text' value='' id='imagePath' style="display:none;">
+                    </li>
+                    <ul class="ub-f1 ub ub-ver">
+                        <ul class="  c-m1 ub b-blu t-blu ub-ac lis">
+                            <div id="unchangable">
+                                <li id='username' class="lis-icon" style="width:auto;">
+                                </li>
+                            </div>
+                            <div id="changed" style="display:none;">
+                                <li class="lis-icon" style="width:auto;">
+                                    <!--文本开始-->
+                                    <div class="c-wh uc-a1 us-i uinput">
+                                        <input id='nickname' placeholder="请输入昵称" type="text" class="uc-a1">
+                                    </div><!--文本结束-->
+                                </li>
+                            </div>
+                            <li class="lis-icon ub-img" onclick="edit_name()">
+                                <img src="css/img/edit.png">
+                            </li>
+                        </ul>
+                        <ul class="ub ub-ac t-gra ulev-2">
+                            <li class="umh2 umw2 ub-img">
+                                <img src="css/img/level.png">
+                            </li>
+                            <li class="ub-f1">
+                                1级
+                            </li>
+                        </ul>
+                    </ul>
+                </ul>
+                <ul class=" ub ubb b-blu c-m1 t-blu ub-ac lis">
+                    <li class="lis-icon" style="width:auto;">
+                        学号：
+                    </li>
+                    <div id="tied" style="display:none;">
+                        <ul class="  c-m1 ub b-blu t-blu ub-ac lis">
+                            <li id='studentNo' class="lis-icon" style="width:auto;">
+                            </li>
+                            <li class="lis-icon ub-img tx-r">
+                                <img src="css/img/edit.png" onclick="tie()">
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="untied" style=" right:0px;">
+                        <li class="ub-f1">
+                            <!--按钮开始--><!--按钮开始-->
+                            <div ontouchstart="zy_touch('btn-act2')" class="btn  b-bla uinn2 uinl c-blu2 c-m1 uc-n t-wh" onclick="tie()">
+                                绑定账号
+                            </div>
+                            <!--按钮结束--><!--按钮结束-->
+                        </li>
+                    </div>
+                </ul>
+            </div>
+            <!--列表结束-->
+            <div align="right" style="margin-top:3%;">
+                <a class="word_single" onclick="modify_password()">修改密码？</a>
+            </div>
+			<div style="margin-top:8%;">
+                <!--按钮开始-->
+                <div ontouchstart="zy_touch('btn-act2')" class="btn  b-bla uinn5 c-blu2 c-m1 uc-n t-wh" onclick="jump2collection()">
+                    进入我的收藏
+                </div>
+            </div>
+            <!--按钮结束-->
+            <div style="margin-top:5%;">
+                <!--按钮开始-->
+                <div ontouchstart="zy_touch('btn-act2')" class="btn  b-bla uinn5 c-org c-m1 uc-n t-wh" onclick="quitLogin()">
+                    退出登录
+                </div>
+            </div>
+            <!--按钮结束-->
+        </div>
+    </body>
+    <script>
+        
+        
+        
+        window.uexOnload = function(type){
+            if (!type) {
+            
+                uexWindow.setBounce("0");
+                uexWindow.showBounceView("0", "#FFF", "0");
+                uexWindow.showBounceView("1", "#FFF", "0");
+				updateUser();
+				if(getHeadImage()!=null&&getHeadImage()!=''){
+					$$('head_image').src=getHeadImage();
+				}
+                if (getStudentNo() == '') {
+                    document.getElementById('untied').style.display = '';
+                    document.getElementById('tied').style.display = 'none';
+                }
+                else {
+                    document.getElementById('untied').style.display = 'none';
+                    document.getElementById('tied').style.display = '';
+                }
+                $$('username').innerHTML = getNickName();
+                $$('studentNo').innerHTML = getStudentNo();
+            }
+        }
+        zy_init();
+		function reload() {
+			updateUser();
+			if(getHeadImage()!=null&&getHeadImage()!=''){
+					$$('head_image').src=getHeadImage();
+				}
+		}
+        function edit_name(){
+            if ($$("unchangable").style.display == "none") {
+                $$("changed").style.display = "none"
+                $$("unchangable").style.display = "";
+                var new_nickname = $$('nickname').value;
+                
+                var url = 'http://121.192.190.134:8080/IXiaDaManage/usermanager.do?action=modifyCustomerNickName&&userId=' + encodeURIComponent(getUserId()) + '&&nickname=' + encodeURIComponent(document.getElementById('nickname').value);
+                if (new_nickname != '') {
+                    $.getJSON(url, function(){
+                        info('修改成功');
+                        updateUser();
+                        $$('username').innerHTML = new_nickname;
+                    })
+                }
+                $$('nickname').value = '';
+                
+            }
+            else {
+            
+            
+                $$("unchangable").style.display = "none"
+                $$("changed").style.display = "";
+            }
+        }
+        
+        function modify_password(){
+            uexWindow.open("modify_password", 0, "onlyHeaders.html", 2, "", "", 1, "");
+            var storage = window.localStorage;
+            storage.setItem("title", "修改密码");
+            storage.setItem("url", "modifyPassword_content.html");
+        }
+        
+        function tie(){
+            uexWindow.open("tie", 0, "onlyHeaders.html", 2, "", "", 1, "");
+            var storage = window.localStorage;
+            storage.setItem("title", "绑定账号");
+            storage.setItem("url", "tie_content.html");
+        }
+		function jump2collection() {
+			uexWindow.open("collection", 0, "collection_content.html", 2, "", "", 4, "");
+		}
+        
+        function quitLogin(){
+            ixiada_quitLogin();
+            //uexWindow.open("main",0,"main.html",2,"","",1,0);
+            go('login_content.html', '登录');
+        }
+        
+        function choose_pic(){
+            //            uexUploaderMgr.onStatus = function(opId, fileSize, percent, serverPath, status){
+            //                alert('status:' + status);
+            //                if (status == 1) {
+            //                    info("上传完成");
+            //                    uexUploaderMgr.closeUploader(2);
+            //                }
+            //                if (status == 2) {
+            //                    info("上传出错");
+            //                }
+            //            }
+            //            uexUploaderMgr.cbCreateUploader = function(opId, dataType, data){
+            //                uexUploaderMgr.uploadFile(2, document.getElementById("head_image").src, "filename", 1);
+            //                info("开始上传图片");
+            //            }
+            uexWindow.cbActionSheet = function(opId, dataType, data){
+                uexXmlHttpMgr.onData = function(inOpCode, inStatus, inResult){
+                    if (inStatus == 1) {
+                        uexXmlHttpMgr.close(opId);
+                        
+                    }
+                }
+                
+                if (data == 0) {
+                    uexCamera.cbOpen = function(opId, dataType, data){
+//                        uexXmlHttpMgr.open(opId, 'post', ixiada_upload_img, 0);
+//                        uexXmlHttpMgr.setPostData(opId, "1", "filename", data);
+//                        uexXmlHttpMgr.send(opId);
+                        //                        uexUploaderMgr.createUploader(1, ixiada_upload_img);
+						var storage = window.localStorage;
+							storage.setItem("opId",opId);
+			                storage.setItem("address",data);
+							uexWindow.open("tutorial",0,"tutorial3.html",2,"","",4,"");
+                    }
+                    uexCamera.open();
+                    
+                }
+                else 
+                    if (data == 1) {
+                        uexImageBrowser.cbPick = function(opCode, dataType, data){
+                            //                            uexUploaderMgr.createUploader(1, ixiada_upload_img);
+                            //uexXmlHttpMgr.open(opId, 'post', ixiada_upload_img, 0);
+                            //uexXmlHttpMgr.setPostData(opId, "1", "filename", $$('imagePath').value);
+                            //uexXmlHttpMgr.send(opId);
+							var storage = window.localStorage;
+							storage.setItem("opId",opId);
+			                storage.setItem("address",data);
+							uexWindow.open("tutorial",0,"tutorial3.html",2,"","",4,"");
+                        }
+                        uexImageBrowser.pick();
+                    }
+            }
+            uexWindow.actionSheet("更改头像", "取消", ["拍照上传", "从本地上传"]);
+        }
+    </script>
+</html>

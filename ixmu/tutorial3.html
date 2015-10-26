@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/ui-tab.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+		<link rel="stylesheet" href="css/ui-btn.css">
+        <script src="js/zy_json.js">
+        </script>
+        <script src="js/zy_icache.js">
+        </script>
+        <script src="js/zy_tmpl.js">
+        </script>
+        <script src="js/ixiada_request.js">
+        </script>
+        <script src='js/ixada_url_config.js'>
+        </script>
+        <script src="js/jquery.min.js">
+        </script>
+        <script src="js/jquery.Jcrop.js">
+        </script>
+        <script type="text/javascript">
+            
+            jQuery(function(){
+                var jcrop_api;
+                var addr = localStorage.getItem("address");
+                document.getElementById("target").src = addr;
+                document.getElementById("target").click;
+                $('#target').Jcrop({
+                    aspectRatio: 1,
+                    onSelect: updateCoords
+                }, function(){
+                    jcrop_api = this;
+                });
+                $('#target').click(function(e){
+                    jcrop_api.setImage(document.getElementById("target").src);
+                });
+            });
+            
+            function updateCoords(c){
+                $('#x').val(c.x);
+                $('#y').val(c.y);
+                $('#w').val(c.w);
+                $('#h').val(c.h);
+            };
+            
+            function checkCoords(){
+                if (parseInt($('#w').val())) 
+                    return true;
+                alert('Please select a crop region then press submit.');
+                return false;
+            };
+            function save(){
+                var opId = 998;
+                uexXmlHttpMgr.onData = function(inOpCode, inStatus, inResult){
+                    if (inStatus == 1) {
+                        uexXmlHttpMgr.close(opId);
+                        localStorage.setItem("title", "个人信息");
+                        updateUser();
+//						uexWindow.evaluatePopoverScript("root","content","reload()");
+//						uexWindow.close();
+                        uexWindow.open("root", 0, "main.html", 1, "", "", 4, "");
+                    }
+                }
+                uexXmlHttpMgr.open(opId, 'post', ixiada_upload_img, 0);
+                uexXmlHttpMgr.setPostData(opId, "0", "x", document.getElementById("x").value);
+                uexXmlHttpMgr.setPostData(opId, "0", "y", document.getElementById("y").value);
+                uexXmlHttpMgr.setPostData(opId, "0", "w", document.getElementById("w").value);
+                uexXmlHttpMgr.setPostData(opId, "0", "screen_width", document.body.clientWidth);
+                uexXmlHttpMgr.setPostData(opId, "1", "filename", localStorage.getItem("address"));
+                uexXmlHttpMgr.send(opId);
+            };
+        </script>
+        <link rel="stylesheet" href="css/jquery.Jcrop.css" type="text/css" />
+    </head>
+    <body class="ub-ver c-bla" ontouchstart>
+        <div id="footer" class="uf c-bla t-wh ub tab">
+            <!--iPhone导航条开始-->
+            <div class="ub tab" style="width:100%">
+                <div id="btn1" ontouchstart="zy_touch('btn-act2')" class="ub-f1 ub  tab-act" style="border-right:solid 1px;" onclick="cancel()" align="center">
+                    <div class="uinn ulev0 ub-ver tx-c">
+                        取消
+                    </div>
+                </div>
+                <div id="btn2" ontouchstart="zy_touch('btn-act2')" class="ub-f1 ub ub-ver tab-act" onclick="save()" align="center">
+                    <div class="uinn ulev0 tx-c">
+                        保存截取图片
+                    </div>
+                </div>
+				
+            </div>
+            <!--iPhone导航条结束-->
+        </div>
+        <!--footer结束-->
+        <div id="frame" align="center" class="ub ub-ver" style="vertical-align:middle;">
+            <!-- This is the image we're attaching Jcrop to -->
+            <img id="target" alt="" style="width:100%;"/><input type="hidden" id="x" name="x" /><input type="hidden" id="y" name="y" /><input type="hidden" id="w" name="w" /><input type="hidden" id="h" name="h" />
+            <div class="clearfix">
+            </div>
+        </div>
+    </body>
+    <script>
+        window.uexOnload = function(type){
+            //var addr = localStorage.getItem("address");
+            //var addr="css/img/bg.jpg";
+            //document.getElementById("target").src = addr;
+            //document.getElementById("target").click;
+            //document.getElementById("frame").setAttribute('style', document.getElementById("frame").style+'margin-top:'+document.getElementById("picture").height+"px");
+        
+        }
+		function cancel() {
+			uexWindow.close();
+		}
+    </script>
+</html>

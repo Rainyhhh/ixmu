@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/ui-fold.css">
+        <link rel="stylesheet" href="css/ui-res.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/ui-input.css">
+        <link rel="stylesheet" href="css/ui-list.css">
+        <link rel="stylesheet" href="css/ui-btn.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-anim.css">
+        <link rel="stylesheet" href="css/foundation-responsive.css">
+        <script src="js/zy_control.js">
+        </script>
+        <script src="js/zy_click.js">
+        </script>
+        <script src="js/zy_json.js">
+        </script>
+        <script src="js/zy_icache.js">
+        </script>
+        <script src="js/zy_tmpl.js">
+        </script>
+        <script src="js/ixiada_request.js">
+        </script>
+    </head>
+    <body class="um-vp c-wh" ontouchstart>
+        <div id="page_0" class="up ub ub-ver" tabindex="0">
+            <!--header开始-->
+            <div id="header" class="uh c-wh t-bla ub us" style="width:100%;position:fixed;z-index:99999;">
+                <div class="umw3" ontouchstart="zy_touch()" onclick="back()">
+                    <div class="umh4 uinl uinn2 uc-a2" style="min-width:60%;">
+                        <div class="ub-img res4 umh4 ">
+                        </div>
+                    </div>
+                </div>
+                <h1 id="title" class="ut ub-f1 ulev1 ut-s tx-c" style="font-family:黑体">我的收藏</h1>
+                <div class="umw3" ontouchstart="zy_touch()" onclick="delete_state()">
+                    <!--按钮开始-->
+                    <div class="umh4 uinl uinn2 uc-a2" style="min-width:60%;">
+                        <div id="delete_finish" class="ub-img res8 umh4 ">
+                        </div>
+                    </div>
+                    <!--按钮结束--><!--插入按钮控件-->
+                </div>
+            </div>
+            <!--header结束--><!--content开始-->
+            <div id="content" class="ub-f1 tx-l t-bla" style="top:4em;">
+                <div class="row">
+                    <div id='apps'>
+                    </div>
+                    <div class="three columns" style="padding-top:3%;">
+                        <div id="more" align="center" onclick="add_app()">
+                            <img ontouchstart="zy_touch('btn-act')" src="css/img/add.png" class="app_style2"/><h2 class="img-word2">添加</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--content结束-->
+        </div>
+    </body>
+    <script>
+        
+        var url = 'http://121.192.190.134:8080/IXiaDaManage/appmanager.do?action=selectSaveApp&&userid=' + getUserId();
+        
+        var templ = '<div  ontouchstart="zy_touch(\'btn-act\')" id="shake${id}" class="three columns nothing" style="padding-top:3%;">' +
+        '<div align="center">' +
+        '<div id="delete_on${id}" style="position:absolute;top:0%;right:5%;z-index:2; display:none;" onclick="delete_app(${id})">' +
+        '<img src="css/img/delete2.png" >' +
+        '</div><div id="shit${id}" onclick="go(\'${appurl}\',\'${appname}\')" >' +
+        '<img name="image${iconpath}"  style="width:80%;z-index:1;" src="${iconpath}"/><h2 class="img-word2">${appname}</h2></div>' +
+        '</div>' +
+        '</div>';
+        zy_init();
+        window.uexOnload = function(type){
+            if (!type) {
+                uexWindow.setBounce("0");
+                uexWindow.showBounceView("0", "#FFF", "0");
+                uexWindow.showBounceView("1", "#FFF", "0");
+                zy_initcache(function(){
+                
+                    loadAppWithoutCache(url, templ, 'apps');
+                    
+                });
+            }
+        }
+		function reload() {
+			zy_initcache(function(){
+                
+                    loadAppWithoutCache(url, templ, 'apps');
+                    
+                });
+		}
+        function delete_app(id){
+            var url_delete = 'http://121.192.190.134:8080/IXiaDaManage/appmanager.do?action=deleteSaveApp&&userid=' + getUserId() + '&&appid=' + id;
+            $.getJSON(url_delete, function(data){
+				document.getElementById("shake"+id).style.display = "none";
+                //$$('apps').innerHTML = '';
+                //$.clearLS(url);
+                //loadIndexApp(url, templ2, 'apps');
+                //alert('已删除');
+                uexWindow.evaluatePopoverScript("root","content","reload()");
+            }, 'json', function(){
+                alert('删除失败，请检查网络连接')
+            });
+            
+        }
+        
+        function delete_state(){        
+            $.getJSON(url, function(data){
+                for (var v in data) {
+                
+                    if ($$("delete_on" + data[v].id).style.display == "") {
+                        $$("delete_on" + data[v].id).style.display = "none";
+                        document.getElementById("shake" + data[v].id).className = document.getElementById("shake" + data[v].id).className.replace("shake_it", "nothing");
+                        document.getElementById("shit" + data[v].id).setAttribute('onclick', 'go("' + data[v].appurl + '","' + data[v].appname + '")');
+                    }
+                    else {
+                        $$("delete_on" + data[v].id).style.display = "";
+                        document.getElementById("shake" + data[v].id).className = document.getElementById("shake" + data[v].id).className.replace("nothing", "shake_it");
+                        document.getElementById("shit" + data[v].id).onclick = null;
+                    }
+                }
+				
+            });
+			if (document.getElementById("more").onclick != null){
+					document.getElementById("more").onclick = null;
+					document.getElementById("delete_finish").className = document.getElementById("delete_finish").className.replace("res8", "res11");
+				}
+				else {
+					document.getElementById("more").setAttribute('onclick','add_app()');
+					document.getElementById("delete_finish").className = document.getElementById("delete_finish").className.replace("res11", "res8");
+				}
+            
+        }
+        
+        function add_app(){
+            uexWindow.open("add_app", 0, "addApp_content.html", 2, "", "", 4, "");
+            // var storage = window.localStorage;
+            //storage.setItem("title","添加应用");
+            //storage.setItem("url","addApp_content.html");
+        }
+        
+        function back(){
+            uexWindow.close();
+        }
+    </script>
+</html>

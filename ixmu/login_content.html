@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/ui-on.css">
+        <link rel="stylesheet" href="css/ui-res.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/ui-input.css">
+        <link rel="stylesheet" href="css/ui-list.css">
+        <link rel="stylesheet" href="css/ui-btn.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+		<link rel="stylesheet" href="css/foundation-responsive.css">
+        <script src="js/zy_control.js">
+        </script>
+        <script src="js/zy_click.js">
+        </script>
+		<script src="js/zy_json.js">
+		</script>
+		<script src="js/zy_icache.js">		
+		</script>	
+		<script src="js/zy_tmpl.js">
+		</script>
+		<script src="js/ixiada_request.js"></script>
+		<script src="js/ixiada_property_check.js"></script>		
+    </head>
+    <body class="um-vp" style="padding:5%;" ontouchstart>
+        <!--文本开始-->
+            <div class="t-bla ub uba uc-a1 b-gra c-wh us-i uinput uinn4">
+                <div class="res5  umw2 ub-img ">
+                </div>
+                <div class="ub-f1 uinn1">
+                    <input id="phone" placeholder="账号" type="text" oninput="phone_blur()" style="background:none;" onpropertychange="phone_blur()">					
+                </div>
+				<div id="phone_check" class="umw2 ub-img uinn6">
+                </div>
+            </div>
+        <!--文本结束-->
+		<!--文本开始-->
+            <div class="t-bla ub uba uc-a1 b-gra c-wh us-i uinput uinn4">
+                <div class="res7  umw2 ub-img ">
+                </div>
+                <div class="ub-f1 uinn1">
+                    <input id="password" placeholder="密码" type="password" oninput="password_blur()" onpropertychange="password_blur()" style="background:none;">
+                </div>
+				<div id="password_check" class="umw2 ub-img uinn6">
+                </div>
+            </div>
+        <!--文本结束-->
+		<div align="right" style="position:relative;">
+			<a class="word_single" onclick="" style="margin:3% 5%;">忘记密码？</a>
+			
+		</div>
+		<div align="left">
+			<a id="warn" class="word_single" onclick="" style="margin:3% 5%; color:red;"></a>
+		</div>
+		
+		<div class="row" style="margin-top:10%;">
+			<div class="six columns">
+                    <div ontouchstart="zy_touch('btn-act2')" class="btn b-bla uinn5 c-blu2 t-wh ulev-1" style="margin:5%;" onclick="login()">
+                        登录
+                    </div>
+                    <!--按钮结束-->
+                </div>
+                <div class="six columns">
+                    <div ontouchstart="zy_touch('btn-act2')" class="btn b-bla uinn5 c-blu2 t-wh ulev-1" style="margin:5%;" onclick="register()">
+                        注册
+                    </div>
+                    <!--按钮结束-->
+                </div>
+		</div>
+    </body>
+    <script>
+        zy_init();
+        window.uexOnload = function(type){
+            if (!type) {
+                uexWindow.setBounce("0");
+                uexWindow.showBounceView("0", "#FFF", "0");
+                uexWindow.showBounceView("1", "#FFF", "0");
+            }
+        }
+        function login(){
+            if (phone_blur()) {
+				return;
+			}
+			if (password_blur()) {
+				return;
+			}
+			uexWindow.toast("1", "5", "正在登陆中，请稍等...", "0");
+			var username=document.getElementById("phone").value;
+			var password=document.getElementById("password").value;
+			var url='http://121.192.190.134:8080/IXiaDaManage/usermanager.do?action=customerLogin&&phonenumber='+username+'&&password='+password;
+			$.getJSON(url,function(data){
+				if(data.result!='false'){	
+					window.localStorage.setItem('user',data);
+					window.localStorage.setItem('ixiada_user_id',data.id);
+					window.localStorage.setItem('ixiada_user_libpassword',data.libpassword);
+					window.localStorage.setItem('ixiada_user_nickname',data.nickname);
+					window.localStorage.setItem('ixiada_user_phonenumber',data.phonenumber);
+					window.localStorage.setItem('ixiada_user_studentnum',data.studentnum);
+					window.localStorage.setItem('ixiada_user_headimage',data.headimage);
+					uexWindow.closeToast();	
+					uexWindow.open('main',0,'main.html',1,'','',4,'');
+				}
+				else{					
+					info('账号或密码错误');
+					uexWindow.closeToast();		
+				}
+			});
+        }
+		function register() {
+			uexWindow.open("register",0,"onlyHeaders.html",2,"","",1,"");
+			var storage = window.localStorage;
+			storage.setItem("title","注册");
+			storage.setItem("url","register_content.html");
+		}
+    </script>
+</html>

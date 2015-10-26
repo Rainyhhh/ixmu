@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/ui-on.css">
+        <link rel="stylesheet" href="css/ui-res.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/ui-input.css">
+        <link rel="stylesheet" href="css/ui-list.css">
+        <link rel="stylesheet" href="css/ui-btn.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <script src="js/zy_control.js">
+        </script>
+        <script src="js/zy_click.js">
+        </script>
+    </head>
+    <body class="um-vp" ontouchstart>
+        <!--列表开始-->
+        <div class="uc-a1  c-wh us t-blu" style="margin:3%">
+            <ul class="uc-t1 ubb ub b-gra c-m2 ub-ac umh4 lis">
+                <li class="ub-f1 ut-s">
+                    通知铃声
+                </li>
+                <li class="tx-r t-blu ulev-1">
+                    <!--开关按钮开始-->
+                    <input class="uhide" type="checkbox">
+                    <div class="swi uc-a1 uba b-gra" ontouchstart="zy_touch('',zy_for)">
+                        <div class="uabs swi-btn us">
+                        </div>
+                    </div>
+                    <!--开关按钮结束-->
+                </li>
+            </ul>
+            <ul class=" ub ubb b-gra c-m2 ub-ac umh4 lis">
+                <li class="ub-f1 ut-s">
+                    通知震动
+                </li>
+                <li class="tx-r t-blu ulev-1">
+                    <!--开关按钮开始-->
+                    <input class="uhide" type="checkbox">
+                    <div class="swi uc-a1 uba b-gra" ontouchstart="zy_touch('',zy_for)">
+                        <div class="uabs swi-btn us">
+                        </div>
+                    </div>
+                    <!--开关按钮结束-->
+                </li>
+            </ul>
+			<ul class=" ub ubb b-gra c-m2 ub-ac umh4 lis">
+                <li class="ub-f1 ut-s">
+                    消息推送提示
+                </li>
+                <li class="tx-r t-blu ulev-1">
+                    <!--开关按钮开始-->
+                    <input class="uhide" type="checkbox">
+                    <div class="swi uc-a1 uba b-gra" ontouchstart="zy_touch('',zy_for)">
+                        <div class="uabs swi-btn us">
+                        </div>
+                    </div>
+                    <!--开关按钮结束-->
+                </li>
+            </ul>
+        </div>
+        <!--列表结束-->
+        <!--列表开始-->
+        <div class="uc-a1  c-wh us t-blu" style="margin:3%">
+            <ul ontouchstart="zy_touch('btn-act')" class="uc-t1 ubb ub b-gra c-m2 ub-ac umh4 lis" onclick="jump2reply()">
+                <li class="ub-f1 ut-s">
+                    意见反馈
+                </li>
+                <li class="tx-r t-blu ulev-1">
+                    <img src="css/img/right_arrow.png"/>
+                </li>
+            </ul>
+            <ul ontouchstart="zy_touch('btn-act')" class=" ub ubb b-gra c-m2 ub-ac umh4 lis" onclick="jump2questions()">
+                <li class="ub-f1 ut-s">
+                    常见问题
+                </li>
+                <li class="tx-r t-blu ulev-1">
+                    <img src="css/img/right_arrow.png"/>
+                </li>
+            </ul>
+        </div>
+        <!--列表结束-->
+        <div class="uc-a1  c-wh us t-blu" style="margin:3%">
+            <ul ontouchstart="zy_touch('btn-act')" class=" ub ubb b-gra c-m2 ub-ac umh4 lis">
+                <li class="ub-f1 ut-s">
+                    关于我们
+                </li>
+                <li class="tx-r t-blu ulev-1">
+                    <img src="css/img/right_arrow.png"/>
+                </li>
+            </ul>
+        </div>
+    </body>
+    <script>
+        zy_init();
+        window.uexOnload = function(type){
+            if (!type) {
+                uexWindow.setBounce("0");
+                uexWindow.showBounceView("0", "#FFF", "0");
+                uexWindow.showBounceView("1", "#FFF", "0");
+            }
+        }
+		function jump2reply() {
+			uexWindow.open("reply",0,"onlyHeaders.html",2,"","",1,"");
+		    var storage = window.localStorage;
+			storage.setItem("title","意见反馈");
+			storage.setItem("url","reply_content.html");
+		}
+		function jump2questions() {
+			uexWindow.open("questions",0,"onlyHeaders.html",2,"","",1,"");
+		    var storage = window.localStorage;
+			storage.setItem("title","常见问题");
+			storage.setItem("url","questions_content.html");
+		}
+    </script>
+</html>

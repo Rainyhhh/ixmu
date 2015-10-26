@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/ui-btn.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+		<link rel="stylesheet" href="css/ui-input.css">
+        <link rel="stylesheet" href="css/ui-tab.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/ui-res.css">
+        <script src="js/zy_control.js">
+        </script>
+        <script src="js/zy_click.js">
+        </script>
+		<script src="js/zy_json.js">
+		</script>
+		<script src="js/zy_icache.js">		
+		</script>	
+		<script src="js/zy_tmpl.js">
+		</script>
+		<script src="js/ixiada_request.js"></script>
+        <script>
+        </script>
+    </head>
+    <body class="um-vp c-gra" ontouchstart>
+        <div id="page_0" class="up ub ub-ver res16" tabindex="0">
+            <!--header开始-->
+            <div id="header" class="uh t-wh ub header " style="width:100%;z-index:9999;">
+                <div class="umw3" ontouchstart="zy_touch()" >
+                	<!--按钮开始-->
+                    <div class="umh4 uinl uinn2 uc-a2" style="min-width:60%;">
+                        <div class="ub-img umh4" style="padding-left:3em;">
+                        </div>
+                    </div>
+                    <!--按钮结束-->
+                    <!--插入按钮控件-->
+                </div>
+                <h1 id="title" class="ut ub-f1 ulev1 ut-s tx-c" style="font-family:黑体">主页</h1>
+                <div class="umw3" ontouchstart="zy_touch('btn-act')" onclick="jump2settings()">
+                    <!--按钮开始-->
+                    <div class="umh4 uinl uinn2 uc-a2" style="min-width:60%;">
+                        <div class="ub-img res1 umh4" >
+                        </div>
+                    </div>
+                    <!--按钮结束-->
+                    <!--插入按钮控件-->
+                </div>
+            </div>
+            <!--header结束-->
+            <!--content开始-->
+            <div id="content" class="ub-f1 tx-l res17" style="margin-bottom:1px;">
+            </div>
+            <!--content结束-->
+            <!--footer开始-->
+            <div id="footer" class="uf ub tab t-gra" style="border-top:solid 1px;">
+                <!--iPhone导航条开始-->
+                <div class="ub tab t-blu1" style="width:100%">
+                    <input class="uhide" type="radio" name="tabSwitch" checked="true">
+                    <div id="btn1" ontouchstart="zy_touch('',zy_for)" class="ub-f1 ub ub-ver tab-act" onclick="loadcontent1()">
+                        <div class="ub-f1 ub-img5 tp-home">
+                        </div>
+                        <div class="uinn ulev-2 tx-c">
+                            主页
+                        </div>
+                    </div>
+                    <input class="uhide" type="radio" name="tabSwitch">
+                    <div id="btn2" ontouchstart="zy_touch('',zy_for)" class="ub-f1 ub ub-ver tab-act" onclick="loadcontent2()">
+                        <div class="ub-f1 ub-img5 tp-news">
+                        </div>
+                        <div class="uinn ulev-2 tx-c">
+                            资讯
+                        </div>
+                    </div>
+                    <input class="uhide" type="radio" name="tabSwitch">
+                    <div id="btn3" ontouchstart="zy_touch('',zy_for)" class="ub-f1 ub ub-ver tab-act" onclick="loadcontent3()">
+                        <div class="ub-f1 ub-img5 tp-app">
+                        </div>
+                        <div class="uinn ulev-2 tx-c">
+                            应用
+                        </div>
+                    </div>
+                    <input  class="uhide" type="radio" name="tabSwitch">
+                    <input id="self_info" class="uhide" type="radio" name="tabSwitch">
+                    <div id="btn5" ontouchstart="zy_touch('',zy_for)" class="ub-f1 ub ub-ver tab-act" onclick="loadcontent5()">
+                        <div class="ub-f1 ub-img5 tp-account">
+                        </div>
+                        <div class="uinn ulev-2 tx-c">
+                            账号
+                        </div>
+                    </div>
+                </div>
+                <!--iPhone导航条结束-->
+            </div>
+            <!--footer结束-->
+        </div>
+    </body>
+    <script>
+        zy_init();
+        window.uexOnload = function(type){
+			var storage = window.localStorage;
+			storage.setItem('header_height',$$('header').offsetHeight);
+			storage.setItem('footer_height',$$('footer').offsetHeight);
+			if(localStorage.getItem("title") == "个人信息") {
+				loadcontent5();
+				document.getElementById("self_info").checked = "true";
+			}
+            else if (!type) {
+                zy_con("content", "main_content.html", 0, $$("header").offsetHeight);
+            }
+            window.onorientationchange = window.onresize = function(){
+                zy_resize('content', 0, $$('header').offsetHeight);
+            }
+        }
+		function loadcontent1()
+		{
+			$$("title").innerText="主页";
+			zy_con("content", "main_content.html", 0, $$("header").offsetHeight);
+		}
+		function loadcontent2()
+		{
+			$$("title").innerText="新闻资讯";
+			zy_con("content", "news_content.html", 0, $$("header").offsetHeight);
+		}
+		function loadcontent3()
+		{
+			$$("title").innerText="校园应用";
+			zy_con("content", "app_content.html", 0, $$("header").offsetHeight);
+		}
+		function loadcontent5()
+		{
+			 var ifLog = ifLogin();
+                if (ifLogin() == false) {
+                    var storage = window.localStorage;
+                    storage.setItem("title", "登录");
+                    storage.setItem("url", "login_content.html");
+                    uexWindow.open("login", 0, "onlyHeaders.html", 4, "", "", 1, 0);
+                    return;
+                }
+			$$("title").innerText="个人管理";
+			zy_con("content", "account_content.html", 0, $$("header").offsetHeight);
+		}
+
+		function jump2settings()
+		{
+			uexWindow.open("settings",0,"onlyHeaders.html",1,"","",1,"");
+		    var storage = window.localStorage;
+			storage.setItem("title","设置");
+			storage.setItem("url","settings_content.html");
+		}
+    </script>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/ui-btn.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-input.css">
+        <link rel="stylesheet" href="css/ui-tab.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/ui-res.css">
+        <script src="js/zy_control.js">
+        </script>
+        <script src="js/zy_click.js">
+        </script>
+        <script>
+        </script>
+    </head>
+    <body class="um-vp c-gra" ontouchstart>
+        <div id="page_0" class="up ub ub-ver" tabindex="0">
+            <!--header开始-->
+            <div id="header" class="uh c-wh t-bla ub us header" style="width:100%">
+                <div class="umw3" ontouchstart="zy_touch('btn-act')" onclick="back()">
+                    <div class="umh4 uinl uinn2 uc-a2" style="min-width:60%;">
+                        <div class="ub-img res4 umh4 ">
+                        </div>
+                    </div>
+                </div>
+                <h1 id="title" class="ut ub-f1 ulev1 ut-s tx-c" style="font-family:黑体"></h1>
+                <div id="deleteChange" class="umw3" ontouchstart="zy_touch('btn-act')" onclick="">
+                    <!--按钮开始-->
+                    <div class="umh4 uinl uinn2 uc-a2" style="min-width:60%;" onclick='refresh()'>
+                        <div id="refresh" class="ub-img res3 umh4 ">
+                        </div>
+                    </div>
+                    <!--按钮结束-->
+                    <!--插入按钮控件-->
+                </div>
+            </div>
+            <!--header结束-->
+            <!--content开始-->
+            <div id="content" class="ub-f1 tx-l t-bla">
+            </div>
+            <!--content结束-->
+        </div>
+    </body>
+    <script>
+        var now_url;
+        zy_init();
+        window.uexOnload = function(type){
+            uexWindow.toast("1", "5", "载入中，请稍等...", "0");
+            if (!window.localStorage.getItem("title")) {
+            
+                $$("title").innerText = "收藏";
+                $$("refresh").className = $$("refresh").className.replace("res3", "res8");
+                zy_con("content", "collection_content.html", 0, $$("header").offsetHeight + 3);
+                
+            }
+            else {
+                var url = window.localStorage.getItem("url");
+                
+                if (url.indexOf('html') == url.length - 4) {
+			
+                    zy_con("content", window.localStorage.getItem("url"), 0, $$("header").offsetHeight + 3);
+                }
+                else {
+			
+                    uexWindow.openPopover("pop", "0", window.localStorage.getItem("url"), "", 0, $$("header").offsetHeight+3, document.body.clientWidth, $$("content").offsetHeight, "5", "512");
+                }
+                $$("title").innerText = window.localStorage.getItem("title");
+                //uexWindow.open('appppp',0,window.localStorage.getItem("url"),0,'','',4,'');
+            
+                //zy_con("content",window.localStorage.getItem("url"),0,$$("header").offsetHeight+3);
+            
+            }
+            window.onorientationchange = window.onresize = function(){
+                zy_resize('content', 0, $$('header').offsetHeight + 3);
+            }
+            uexWindow.closeToast();
+        }
+        function back(){
+            uexWindow.close();
+        }
+        
+        function refresh(){
+				uexWindow.toast("1", "5", "载入中，请稍等...", "0");
+			//刷新页面
+            call(function(){
+				window.location.reload();
+	
+
+			});
+			uexWindow.closeToast();
+            //uexWindow.evaluatePopoverScript('pop','pop','document.loca')
+        }
+        
+        function call( fun){
+		
+            //将fun转为string，并增加立即执行标识
+            fun = '(' + fun.toString() + ')();';
+           // uexWindow.evaluateScript(id, '0', fun);
+			return uexWindow.evaluatePopoverScript('','pop',fun);
+        }
+    </script>
+</html>

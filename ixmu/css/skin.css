@@ -1,0 +1,30 @@
+/* LayerSlider Default Skin */
+
+
+
+.ls-bluediamond {
+	background: url('img/slider-shadow.png') center bottom no-repeat #f5f5f5;
+}
+
+.ls-bluediamond .ls-playvideo {
+	width: 50px;
+	height: 50px;
+	margin-left: -25px;
+	margin-top: -25px;
+}
+.ls-bluediamond .ls-playvideo,
+.ls-bluediamond .ls-nav-sides{
+	background-image: url(skin.png);	
+}
+.ls-bluediamond .ls-playvideo {
+	background-position: -300px -150px;
+}
+.ls-bluediamond .ls-playvideo:hover,
+.ls-bluediamond .ls-vpcontainer:hover .ls-playvideo {
+	background-position: -375px -150px;
+}
+
+
+.ls-bluediamond .ls-nav-start,
+.ls-bluediamond .ls-nav-stop{ display: none; }
+

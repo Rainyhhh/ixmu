@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/ui-on.css">
+        <link rel="stylesheet" href="css/ui-res.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/ui-input.css">
+        <link rel="stylesheet" href="css/ui-list.css">
+        <link rel="stylesheet" href="css/ui-btn.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-fold.css">
+        <script src="js/zy_control.js">
+        </script>
+        <script src="js/zy_click.js">
+        </script>
+		<script src="js/zy_json.js">
+		</script>
+		<script src="js/zy_icache.js">
+		
+		</script>	
+		<script src="js/zy_tmpl.js">
+		
+		
+		</script>
+		<script src="js/ixiada_request.js"></script>
+    </head>
+	  <body class="um-vp c-gra" ontouchstart>
+        <div id="page_0" class="up ub ub-ver" tabindex="0">
+            <!--header开始-->
+            <div id="header" class="uh c-wh t-bla ub us header" style="width:100%;position:fixed;z-index:99999;">
+                <div class="umw3" ontouchstart="zy_touch('btn-act')" onclick="back()">
+                	<div class="umh4 uinl uinn2 uc-a2" style="min-width:60%;">
+                        <div class="ub-img res4 umh4 ">
+                        </div>
+                    </div>
+                </div>
+                <h1 id="title" class="ut ub-f1 ulev1 ut-s tx-c" style="font-family:黑体">收藏应用</h1>
+                <div id="deleteChange" class="umw3" ontouchstart="zy_touch('btn-act')" onclick="addCollection()">
+                    <!--按钮开始-->
+                    <div class="umh4 uinl uinn2 uc-a2" style="min-width:60%;">
+                        <div id="add" class="ub-img res10 umh4 ">
+                        </div>
+                    </div>
+                    <!--按钮结束-->
+                    <!--插入按钮控件-->
+                </div>
+            </div>
+            <!--header结束-->
+            <!--content开始-->
+            <div id="content" class="ub-f1 tx-l t-bla" style="top:3.3em;">
+            	 <div id='category'></div>
+            </div>
+            <!--content结束-->
+        </div>
+    </body>
+  
+    <script>
+    	var url_app='http://121.192.190.134:8080/IXiaDaManage/appmanager.do?action=selectNoSaveApp&&userid='+getUserId();
+		var templ_app= '<input id="checkbox${id}" type="checkbox" name="che1" class="uhide" value="">'+
+		                      '<div onclick="zy_for(event)" class="ub ubb uc-n  c-wh c-m1 b-gra t-gra"  style="padding-right:3%;">' + 
+		                        '<div class="ub-f1 ut-s tx-l">'+
+		                             '<ul class="ub b-gra t-gra ub-ac lis">'+				 
+                            '<li class="lis-icon ub-img">'+
+                                '<img src="${iconpath}" style="width:80%;">'+
+                            '</li>'+
+                            '<li class="ub-f1 ut-s">'+
+                                '${appname}'+
+                            '</li>'+
+							
+                       ' </ul>'+'</div>'
+					   +'<div class="che-icon ub-img umw1">'+
+                    '</div>';
+		var url_category='http://121.192.190.134:8080/IXiaDaManage/columnmanager.do?action=getAllColumn';
+		var templ_category='<div class="uc-n b-gra">'+
+            '<input type="checkbox" class="uhide" checked="true">'+
+            '<div ontouchstart="zy_touch(\'btn-act\')" onclick="zy_for(event,zy_fold);" class="col us uc-n t-blu ub ub-ac c-gra umh5 ulev-1">'+
+               ' <div class="ub-f1 ut-s" style="margin-left:5%;">'+
+                    '${columnname}'+
+               ' </div>'+
+               ' <div class="umh3 umw3 ub-img col-icon uc-a">'+
+               ' </div>'+
+            '</div>'+
+            '<div class=" umh3 t-wh  us-i c-wh col">'+
+                '<!--列表开始-->'+
+     
+                    '<div id="app${columnname}">'+
+
+                   
+                '</div>'+
+                '<!--列表结束-->'+
+           ' </div>'+
+        '</div>';
+        zy_init();
+        window.uexOnload = function(type){
+            if (!type) {
+                uexWindow.setBounce("0");
+                uexWindow.showBounceView("0", "#FFF", "0");
+                uexWindow.showBounceView("1", "#FFF", "0");
+				zy_initcache(function(){
+					loadAppWithoutCache(url_category,templ_category,'category');
+					loadApp();
+				
+				})
+            }
+        }
+		function loadApp(){
+			$.getJSON(url_app,function(data){
+	
+				for(var v in data){
+					var s=zy_tmpl_s(templ_app,data[v],null);
+					$$('app'+data[v].appcolumn).innerHTML=$$('app'+data[v].appcolumn).innerHTML+s;
+					//alert('app'+data[v].appcolumn);
+				}
+				
+			},'json', function(e){
+    
+        alert('加载失败，请查看您的网络连接');
+    }, 'POST', '', false);
+    
+			
+		}
+        function submit(){
+            if (/^\s*$/.test(document.getElementById("reply").value)) 
+                alert("内容不能为空！");
+        }
+		function back()
+		{
+			uexWindow.close();
+		}
+		function addCollection(){
+			$.getJSON(url_app,function(data){
+				for(var v in data){
+					if($$('checkbox'+data[v].id).checked){
+						var url_add='http://121.192.190.134:8080/IXiaDaManage/appmanager.do?action=addSaveApp&&userid='+encodeURIComponent(getUserId())+'&&appid='+encodeURIComponent(data[v].id);
+						
+						$.getJSON(url_add,function(){					
+				            uexWindow.evaluateScript("collection",0,"reload()");
+							uexWindow.evaluatePopoverScript("root","content","reload()");
+				            },'json',function(e){alert('加载失败，请查看您的网络连接');},'POST',null,false);
+					};
+				}
+				zy_initcache(function(){
+					loadAppWithoutCache(url_category,templ_category,'category');
+					loadApp();
+				
+				})
+				alert('添加成功');				
+				//uexWindow.close();
+				},'json', function(e){alert('加载失败，请查看您的网络连接');}, 'POST', '', false);
+//					uexWindow.close();
+				  //uexWindow.open("collection", 0, "collection_content.html", 1, "", "", 4);
+		}
+		
+//		function addCollection(){
+//			$.getJSON(url_app,function(data){
+//				for(var v in data){
+//					if($$('checkbox'+data[v].id).checked){
+//						var url_add='http://121.192.190.134:8080/IXiaDaManage/appmanager.do?action=addSaveApp&&userid='+encodeURIComponent(getUserId())+'&&appid='+encodeURIComponent(data[v].id);
+//						
+//						$.getJSON(url_add,function(){},'json',function(e){alert('加载失败，请查看您的网络连接');},'POST',null,false);
+//					};
+//				}
+//				//uexWindow.evaluateScript("collection",0,"reload()");
+//				},'json', function(e){alert('加载失败，请查看您的网络连接');}, 'POST', '', false);
+//					alert('添加成功');
+//					uexWindow.close();
+//				  //uexWindow.open("collection", 0, "collection_content.html", 1, "", "", 4);
+//		}
+		
+    </script>
+</html>

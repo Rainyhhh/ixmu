@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/ui-res.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/ui-input.css">
+        <link rel="stylesheet" href="css/ui-list.css">
+        <link rel="stylesheet" href="css/ui-btn.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <script src="js/zy_control.js">
+        </script>
+        <script src="js/zy_click.js">
+        </script>
+		<script src="js/zy_json.js">
+		</script>
+		<script src="js/zy_icache.js">		
+		</script>	
+		<script src="js/zy_tmpl.js">	
+		</script>
+		<script src="js/zy_slide.js"></script>
+		<script src="js/ixiada_request.js"></script>
+    </head>
+    <body id="body1" class="um-vp" style=" overflow:hidden; "  ontouchstart>
+	<div id="title1" class="uh t-wh ub" style="position:fixed;top:0;width:100%;z-index:99998;min-height:4em;overflow:hidden;">
+	    <div class="umw3" ontouchstart="zy_touch()" >
+                	<!--按钮开始-->
+                    <div class="umh4 uinl uinn2 uc-a2" >
+                        <div class="ub-img umh4" style="padding-left:3em;">
+                        </div>
+                    </div>
+                    <!--按钮结束-->
+                    <!--插入按钮控件-->
+                </div>
+                <h1 class="ut ub-f1 ulev1 ut-s tx-c" style="font-family:黑体"></h1>
+                <div class="umw3">
+                    <!--按钮开始-->
+                    <div class="umh4 uinl uinn2 uc-a2">
+                    </div>
+                    <!--按钮结束-->
+                    <!--插入按钮控件-->
+                </div>
+	</div>	
+	<div style="padding:0 5%;">
+    <!--块容器开始-->
+    <div class="ub us  b-gra c-m1 t-wh uc-a1 " style="top:1em;position:fixed; z-index:99999; width:90%;">
+        <div id="jwtz" class="ubr b-gra ub-f1 uinn uc-l1 res14" align="center" onclick="jwtz_click()">
+            教务通知
+        </div>
+        <div id="sxxx" class="ubr b-gra ub-f1 uinn res15" align="center" onclick="ssxx_click()">
+            实习信息
+        </div>
+		<div id="xyzp" class=" b-gra ub-f1 uinn uc-r1 res15" align="center" onclick="xyzp_click()">
+           校园招聘
+    </div>
+    </div>    
+	<!--块容器结束-->
+    <!--列表开始-->
+	<div id="news_content" class="" style="width:100%; top:4em; overflow:auto;">
+    <div class="b-gra  c-wh us t-blu" >
+     <div id='news' ></div>
+		<ul ontouchstart="zy_touch('btn-act2')" class="uc-t1 ubb c-m1 ub b-gra ub-ac lis" onclick="more()" >
+            <li class="lis-icon ub-img">
+            	<img src="css/img/more.png" style="width:80%;">
+            <li class="ub-f1 ut-s ulev-1">
+                更多...
+            </li>
+        </ul>
+    </div>
+	</div>
+    <!--列表结束-->
+</div>
+</body>
+<script>
+	var url_jwtz='http://121.192.190.134:8080/IXiaDaManage/jwcmanager.do?action=jwcNewsRequest';
+	var url_sxxx='http://121.192.190.134:8080/IXiaDaManage/SXmanager.do?action=getSXinfo';
+	var url_xyzp='http://121.192.190.134:8080/IXiaDaManage/JYZDmanager.do?action=getCampusRecruitFirstPage';
+	var temp_jwtz='<ul ontouchstart="zy_touch(\'btn-act\')" class="uc-t1 ubb c-m1 ub b-gra ub-ac lis" onclick="go(\'http://121.192.190.133:8080/ixiada/jwcOneNews.do?url=${links}\',\'${title}\')">'+
+            '<li class="lis-icon ub-img">'+
+            	'<img src="css/img/news_icon.png" style="width:80%;">'+
+            '<li class="ub-f1 ut-s ulev-1">'+
+                '${title}'+
+            '</li>'+
+        '</ul>';
+		
+	var temp_sxxx='<ul ontouchstart="zy_touch(\'btn-act\')" class="uc-t1 ubb c-m1 ub b-gra ub-ac lis" onclick="go(\'http://121.192.190.133:8080/ixiada/Job/jobdetail.do?id=${link}\',\'${unitName}\')">'+
+            '<li class="lis-icon ub-img">'+
+            	'<img src="css/img/news_icon.png" style="width:80%;">'+
+            '<li class="ub-f1 ut-s ulev-1" >'+
+                '${unitName}'+
+            '</li>'+
+        '</ul>';
+	var temp_xyzp='<ul ontouchstart="zy_touch(\'btn-act\')" class="uc-t1 ubb c-m1 ub b-gra ub-ac lis ulev-1" onclick="" style="padding:3%;">'+
+                    '<span>'+
+                    	'${recruitmentName}<br>'+
+						'开始时间：&nbsp;${startTime} <br>'+
+					           '地点：&nbsp;${address} <br>'+
+						'专业：&nbsp;${major} <br>'+
+                    '</span>'
+       
+                '</ul>';
+	var more_url=''
+    zy_init();
+    window.uexOnload = function(type){
+        if (!type) {
+            uexWindow.setBounce("0");
+            uexWindow.showBounceView("0", "#FFF", "0");
+            uexWindow.showBounceView("1", "#FFF", "0");
+            uexWindow.toast("1", "5", "正在登陆中，请稍等...", "1");
+			loadAppWithoutCache(url_jwtz,temp_jwtz,'news');
+			more_url='http://121.192.190.133:8080/ixiada/jwcNews.do';
+			var h2 = document.getElementById("title1").offsetHeight;
+			var h = window.screen.availHeight - localStorage.getItem('header_height') - localStorage.getItem('footer_height') - h2 - 60;
+			document.getElementById("news_content").style.height = h + 'px';
+//			 $$('news_content').slide=new zySlide('news_content','V',function(){
+//    },false,function(e){
+//    });
+        }
+    }
+	function jwtz_click(){
+            $$('news').innerHTML = '';
+			document.getElementById("jwtz").className = document.getElementById("jwtz").className.replace("res15","res14");
+			document.getElementById("sxxx").className = document.getElementById("sxxx").className.replace("res14","res15");
+			document.getElementById("xyzp").className = document.getElementById("xyzp").className.replace("res14","res15");
+            loadAppWithoutCache(url_jwtz, temp_jwtz, 'news');
+			more_url='http://121.192.190.133:8080/ixiada/jwcNews.do';
+        }
+        
+        function ssxx_click(){
+            $$('news').innerHTML = '';
+			document.getElementById("sxxx").className = document.getElementById("sxxx").className.replace("res15","res14");
+			document.getElementById("jwtz").className = document.getElementById("jwtz").className.replace("res14","res15");
+			document.getElementById("xyzp").className = document.getElementById("xyzp").className.replace("res14","res15");
+            loadAppWithoutCache(url_sxxx, temp_sxxx, 'news');
+			more_url='http://121.192.190.133:8080/ixiada/Job.do';
+        }
+        
+        function xyzp_click(){
+            $$('news').innerHTML = '';
+			document.getElementById("xyzp").className = document.getElementById("xyzp").className.replace("res15","res14");
+			document.getElementById("sxxx").className = document.getElementById("sxxx").className.replace("res14","res15");
+			document.getElementById("jwtz").className = document.getElementById("jwtz").className.replace("res14","res15");
+            loadAppWithoutCache(url_xyzp, temp_xyzp, 'news');
+			more_url='http://121.192.190.133:8080/ixiada/jyzd/campusRecruit.do?action=getCampusRecruitFirstPage';
+        }
+		
+		function more(){
+			go(more_url,'更多');
+		}
+</script>
+</html>

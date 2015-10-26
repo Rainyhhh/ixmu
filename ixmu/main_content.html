@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/ui-res.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/ui-input.css">
+        <link rel="stylesheet" href="css/ui-list.css">
+        <link rel="stylesheet" href="css/ui-btn.css">
+        <link rel="stylesheet" href="css/style.css" type="text/css"/>
+        <link rel="stylesheet" href="css/foundation-responsive.css"/>
+        <link rel="stylesheet" href="css/layerslider.css" type="text/css"/>
+        <link rel="stylesheet" id="superfish-css" href="css/superfish.css" type="text/css">
+        <link rel="stylesheet" href="css/fancybox.css" type="text/css" />
+        <link rel="stylesheet" href="css/ui-base.css">
+        <script src="js/zy_control.js">
+        </script>
+        <script src="js/zy_click.js">
+        </script>
+        <script type="text/javascript" async="" src="js/ga.js">
+        </script>
+        <script src="js/zy_json.js">
+        </script>
+        <script src="js/zy_icache.js">
+        </script>
+        <script src="js/zy_tmpl.js">
+        </script>
+        <script src="js/ixiada_request.js">
+        </script>
+        <script src='js/ixada_url_config.js'>
+        </script>
+        <script type="text/javascript" src="js/comment-reply.js">
+        </script>
+        <script type="text/javascript" src="js/jquery.js">
+        </script>
+        <script type="text/javascript" src="js/jquery-easing-1.3.js">
+        </script>
+        <script type="text/javascript" src="js/layerslider.kreaturamedia.jquery.js">
+        </script>
+        <script type="text/javascript">
+        </script>
+		<script src="js/zy_slide.js">
+        </script>
+		<script src="js/zy_event.js">
+        </script>
+		<script src="js/zy_anim.js">
+        </script>
+    </head>
+    <body class="um-vp " ontouchstart style="padding:10px; padding-top:3%;">
+            <div class="gdl-top-layer-slider-wrapper">
+                <script type="text/javascript">
+                    jQuery(document).ready(function(){
+                        jQuery.getJSON(ixiada_main_pic_url, function(data){
+                            for (var v in data) {
+                                document.getElementById("img" + v).src = data[v].indeximagepath;
+                            }
+                        });
+                        jQuery("#layerslider_1").layerSlider({
+                            width: '940px',
+                            height: '355px',
+                            responsive: true,
+                            autoStart: true,
+                            pauseOnHover: true,
+                            firstLayer: 1,
+                            animateFirstLayer: true,
+                            twoWaySlideshow: true,
+                            keybNav: true,
+                            touchNav: true,
+                            imgPreload: true,
+                            navPrevNext: true,
+                            navStartStop: true,
+                            navButtons: true,
+                            
+                            yourLogo: false,
+                            yourLogoStyle: 'position: absolute; left: 10px; top: 10px; z-index: 99;',
+                            yourLogoLink: false,
+                            yourLogoTarget: '_self',
+                            
+                            loops: 0,
+                            forceLoopNum: true,
+                            autoPlayVideos: false,
+                            
+                            autoPauseSlideshow: 'auto',
+                            youtubePreview: 'maxresdefault.jpg',
+                            
+                            cbInit: function(element){
+                            },
+                            cbStart: function(data){
+                            },
+                            cbStop: function(data){
+                            },
+                            cbPause: function(data){
+                            },
+                            cbAnimStart: function(data){
+                            },
+                            cbAnimStop: function(data){
+                            },
+                            cbPrev: function(data){
+                            },
+                            cbNext: function(data){
+                            }
+                        });
+                        
+                    });
+                </script>
+                <div id="layerslider_1" style="margin:0  auto; position: relative; visibility: visible;" class="ls-container ls-bluediamond">
+                    <div id='imgs' class="ls-inner" style="background-color: transparent; width: 100%; height: 33%;">
+                        <div class="ls-layer ls-active" style="width: 100%; height: 33%; left: 0px; right: auto; top: 0px; bottom: auto; visibility: visible; display: none;">
+                            <img id='img0' class="ls-s2" alt="slider4" style="position: absolute; top: -2px; left: -2px; margin-left: 0px; margin-top: 0px; width: 945px; height: 400px; padding: 0px; border-width: 0px; display: none;">
+                        </div>
+                        <div class="ls-layer ls-active" style="width: 100%; height: 33%; left: 0px; right: auto; top: 0px; bottom: auto; visibility: visible; display: none;">
+                            <img id='img1' class="ls-s2" alt="slider4" style="position: absolute; top: -2px; left: -2px; margin-left: 0px; margin-top: 0px; width: 945px; height: 400px; padding: 0px; border-width: 0px; display: none;">
+                        </div>
+                        <div class="ls-layer ls-active" style="width: 100%; height: 33%; left: 0px; right: auto; top: 0px; bottom: auto; visibility: visible; display: none;">
+                            <img id='img2' class="ls-s2" alt="slider4" style="position: absolute; top: -2px; left: -2px; margin-left: 0px; margin-top: 0px; width: 945px; height: 400px; padding: 0px; border-width: 0px; display: none;">
+                        </div>
+                    </div>
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+            <div class="row">
+            	<div style="margin-top:-5%;">
+                        <div class="uinn1 t-gra" style="font-family:黑体;border-bottom: solid 1px;border-top: solid 1px;">
+                            热门推荐 <label style=" color:red; position:relative; font-style:italic;font-size:0.5em;">hot!</label>
+                        </div>
+                        <!--按钮开始-->
+                    </div>
+                <div id="apps">
+                </div>
+                <div class="clear">
+                </div>
+                <!-- personal information-->
+                <div id="login" style="padding-bottom:3%;display:none">
+                    <div id="username" class="uinn1 t-gra" style="font-family:黑体;border-bottom: solid 1px;border-top: solid 1px;">
+                            欢迎你，
+                    </div>
+                    <div id='collect'>
+                    </div>
+                    <div class="three columns">
+                        <div align="center" onclick="collection_enter()" >
+                            <img ontouchstart="zy_touch('btn-act')" src="css/img/more2.png" style="width:70%; margin-top:5%;"/><h2 class="img-word2">更多</h2>
+                        </div>
+                    </div>
+                </div>
+                <div id="unlogin" style="padding-bottom:3%;display:none">
+                    <div>
+                        <div class="uinn1 t-gra" style="font-family:黑体;border-top: solid 1px;">
+                            欢迎你，请登录！
+                        </div>
+                        <!--按钮开始-->
+                    </div>
+                    <div class="six columns">
+                        <div ontouchstart="zy_touch('btn-act2')" class="btn b-bla uinn5 c-blu2 t-wh ulev-1" onclick="login()">
+                            登录
+                        </div>
+                        <!--按钮结束-->
+                    </div>
+                    <div class="six columns">
+                        <div ontouchstart="zy_touch('btn-act2')" class="btn b-bla uinn5 c-blu2 t-wh ulev-1" onclick="register()">
+                            注册
+                        </div>
+                        <!--按钮结束-->
+                    </div>
+                </div>
+            </div>
+    </body>
+    <script>
+        
+        var url = 'http://121.192.190.134:8080/IXiaDaManage/appmanager.do?action=selectIndexApp';
+        var url_collection = 'http://121.192.190.134:8080/IXiaDaManage/appmanager.do?action=selectIndexSaveApp&&userid=';
+        var templ = '<div ontouchstart="zy_touch(\'btn-act\')" class="three columns" style="" onclick="go(\'${appurl}\',\'${appname}\')">' +
+        '<div class="column-service-wrapper" >' +
+        '<div class="column-service-title-wrapper" align="center">' +
+        '<img name="image${iconpath}"  style="margin-top:5%;width:70%" src="${iconpath}"/><h2 class="img-word2" style="text-overflow: ellipsis;">${appname}</h2>' +
+        '</div>' +
+        '</div>' +
+        '</div>';
+        var templ_img = '<div class="ls-layer ls-active" style="width: 100%; height: 33%; left: 0px; right: auto; top: 0px; bottom: auto; visibility: visible; display: none;">' +
+        '<img class="ls-s2" src="${indeximagepath}" alt="slider4" style="position: absolute; top: -2px; left: -2px; margin-left: 0px; margin-top: 0px; width: 945px; height: 400px; padding: 0px; border-width: 0px; display: none;">' +
+        '</div>';
+        zy_init();
+        window.uexOnload = function(type){
+            if (!type) {
+                //自动登录 
+                
+                //window.localStorage.setItem('user','test');
+                //window.localStorage.setItem('ixiada_user_id',1);
+                //updateUser();
+                ///window.localStorage.setItem('ixiada_user_libpassword',123456);
+                //window.localStorage.setItem('ixiada_user_nickname',123456);
+                //window.localStorage.setItem('ixiada_user_phonenumber',123456);
+                //window.localStorage.setItem('ixiada_user_studentnum',123456);
+                
+                //自动登录结束
+                uexWindow.setBounce("0");
+                uexWindow.showBounceView("0", "#FFF", "0");
+                //得到首页图片
+                //loadAppWithoutCache(ixiada_main_pic_url,templ_img,'imgs');
+                zy_initcache(function(){
+                
+                    loadAppWithoutCache(url, templ, 'apps');
+                    
+                });
+                var iflog = ifLogin();
+                if (iflog != false) {//已登录
+                    document.getElementById('login').setAttribute('style', 'padding-bottom:3%');
+                    document.getElementById('unlogin').setAttribute('style', 'padding-bottom:3%;display:none');
+                    
+                    $$('username').innerHTML += getNickName();
+                    
+                    var u = url_collection + getUserId();
+                    loadAppWithoutCache(u, templ, 'collect');
+                    
+                }
+                else {//未登录
+                    document.getElementById('login').setAttribute('style', 'padding-bottom:3%;display:none');
+                    document.getElementById('unlogin').setAttribute('style', 'padding-bottom:3%');
+                }
+                getpushtk();
+                
+            }
+        }
+		function reload() {
+			var u = url_collection + getUserId();
+            loadAppWithoutCache(u, templ, 'collect');
+		}
+        function collection_enter(){
+            uexWindow.open("collection", 0, "collection_content.html", 2, "", "", 4, "");
+        }
+        
+        function login(){
+            uexWindow.open("login", 0, "onlyHeaders.html", 2, "", "", 1, 0);
+            var storage = window.localStorage;
+            storage.setItem("title", "登录");
+            storage.setItem("url", "login_content.html");
+            
+        }
+        
+        function register(){
+            uexWindow.open("register", 0, "onlyHeaders.html", 2, "", "", 1, "");
+            var storage = window.localStorage;
+            storage.setItem("title", "注册");
+            storage.setItem("url", "register_content.html");
+        }
+        
+        //push
+        function getpushtk(){
+            uexDevice.cbGetInfo = function(opCode, dataType, data){
+                if (data != "") {
+                    var obj = eval('(' + data + ')');
+                    var tk = obj.deviceToken;
+                    tk = tk.replace(/ /g, "");
+                    pushios();
+                }
+            }
+            uexDevice.getInfo('11');//得到令牌
+        }
+        
+        //推送
+        function pushios(){
+            uexWidget.setPushNotifyCallback("cbNotify");
+            setdeviceToken();
+            uexWidget.cbGetPushInfo = function(opCode, dataType, data){
+                pushopen(data);
+            }
+            uexWidget.getPushInfo();
+        }
+        
+        function setdeviceToken(){
+            uexWidget.setPushInfo("appkunming.com", "");
+        }
+        
+        function cbNotify(){
+            uexWidget.getPushInfo();
+        }
+        
+        function pushopen(str){
+            // if(str.length==4 || str.length==6){return;}
+            //PUSH格式：{"type":"news","id":0}//type值为：news|prdouct  ID值为要打开的内容ID
+            //  if(str.substring(0,1)!="{"){uexWindow.alert("推送详情：",str,"确定");return;}
+            var json = eval("[" + str + "]");
+            if (json.length == 1) {
+                //alert('id:'+json[0].id);
+                if (json[0].type == "news") {
+                    opennews(json[0].id, 'news_top.html');
+                    return;
+                }
+                if (json[0].type == "product") {
+                    opennews(json[0].id, 'product_top.html');
+                    return;
+                }
+            }
+        }
+    </script>
+</html>

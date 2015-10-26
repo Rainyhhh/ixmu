@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/ui-on.css">
+        <link rel="stylesheet" href="css/ui-res.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/ui-input.css">
+        <link rel="stylesheet" href="css/ui-list.css">
+        <link rel="stylesheet" href="css/ui-btn.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/foundation-responsive.css">
+        <script src="js/zy_control.js">
+        </script>
+        <script src="js/zy_click.js">
+        </script>
+        <script src="js/zy_json.js">
+        </script>
+        <script src="js/ixiada_property_check.js">
+        </script>
+    </head>
+    <body class="um-vp" style="padding:5%;" ontouchstart>
+        <!--文本开始-->
+        <div class="t-bla ub uba uc-a1 b-gra c-wh us-i uinput uinn4">
+            <div class="ub-f1 uinn1">
+                <input id="phone" placeholder="请输入您的手机号码" type="text" class="" style="background:none;" oninput="phone_blur()" onpropertychange="phone_blur()">
+            </div>
+            <div id="phone_check" class="umw2 ub-img uinn6">
+            </div>
+        </div>
+        <!--文本结束--><!--文本开始-->
+        <div class="t-bla ub uba uc-a1 b-gra c-wh us-i uinput uinn4">
+            <div class="ub-f1 uinn1">
+                <input id="username" placeholder="请输入您的昵称" type="text" class="" style="background:none;" oninput="username_blur()" onpropertychange="username_blur()">
+            </div>
+            <div id="username_check" class="umw2 ub-img uinn6">
+            </div>
+        </div>
+        <!--文本结束--><!--文本开始-->
+        <div class="t-bla ub uba uc-a1 b-gra c-wh us-i uinput uinn4">
+            <div class="ub-f1 uinn1">
+                <input id="password" placeholder="输入密码（6-20位）" type="password" class="" style="background:none;" oninput="password_blur()" onpropertychange="password_blur()">
+            </div>
+            <div id="password_check" class="umw2 ub-img uinn6">
+            </div>
+        </div>
+        <!--文本结束--><!--文本开始-->
+        <div class="t-bla ub uba uc-a1 b-gra c-wh us-i uinput uinn4">
+            <div class="ub-f1 uinn1">
+                <input id="password2" placeholder="确认密码" type="password" class="" style="background:none;" oninput="password2_blur()" onpropertychange="password2_blur()">
+            </div>
+            <div id="password2_check" class="umw2 ub-img uinn6">
+            </div>
+        </div>
+        <!--文本结束-->
+        <div align="left">
+            <a class="word_single" onclick="" style="margin:5%;">注：每个学生只能用一个手机号！</a>
+        </div>
+        <div ontouchstart="zy_touch('btn-act2')" class="btn b-bla uinn5 c-blu2 t-wh ulev-1" style="margin:5%;" onclick="register()">
+            注册
+        </div>
+        <!--按钮结束-->
+        <div align="left">
+            <a id="warn" class="word_single" onclick="" style="margin:5%; color:red;"></a>
+        </div>
+    </body>
+    <script>
+        zy_init();
+        window.uexOnload = function(type){
+            if (!type) {
+                uexWindow.setBounce("0");
+                uexWindow.showBounceView("0", "#FFF", "0");
+                uexWindow.showBounceView("1", "#FFF", "0");
+            }
+        }
+        function register(){
+            if (phone_blur()) {
+            }
+            else 
+                if (username_blur()) {
+                }
+                else 
+                    if (password_blur()) {
+                    }
+                    else 
+                        if (password2_blur()) {
+                        }
+                        else {
+                            uexWindow.toast(1, 5, '注册中')
+                            var url = 'http://121.192.190.134:8080/IXiaDaManage/usermanager.do?action=saveCustomer&&phonenumber=' + encodeURIComponent(document.getElementById("phone").value) + '&&password=' + encodeURIComponent(document.getElementById("password").value) + '&&nickname=' + encodeURIComponent(document.getElementById("username").value);
+                            $.getJSON(url, function(data){
+                                if (data.result == 'true') {
+                                    var url = 'http://121.192.190.134:8080/IXiaDaManage/usermanager.do?action=customerLogin&&phonenumber=' + encodeURIComponent(document.getElementById("phone").value) + '&&password=' + encodeURIComponent(document.getElementById("password").value);
+                                    $.getJSON(url, function(data){
+                                        if (data.result != 'false') {
+                                            window.localStorage.setItem('user', data);
+                                            window.localStorage.setItem('ixiada_user_id', data.id);
+                                            window.localStorage.setItem('ixiada_user_libpassword', data.libpassword);
+                                            window.localStorage.setItem('ixiada_user_nickname', data.nickname);
+                                            window.localStorage.setItem('ixiada_user_phonenumber', data.phonenumber);
+                                            window.localStorage.setItem('ixiada_user_studentnum', data.studentnum);
+                                        }
+                                        
+                                    });
+                                    alert('注册成功');
+                                    uexWindow.closeToast();
+                                    uexWindow.open('main', 0, 'main.html', 1, '', '', 4, '');
+                                    
+                                }
+                                else {
+                                    alert(data.reason);
+                                }
+                                
+                            });
+                            
+                        }
+        }
+    </script>
+</html>

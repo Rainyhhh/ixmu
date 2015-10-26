@@ -1,0 +1,71 @@
+.res1{
+	background-image: url(img/settings2.png)!important;
+}
+.res2
+{
+	background-image:url('img/search2.png');
+}
+
+.res3
+{
+	background-image:url('img/refresh.png');
+}
+.res4
+{
+	background-image:url('img/back.png');
+}
+.res5 {
+	background-image: url(img/account.png);
+}
+.res6{
+	background-image: url(img/search.png);
+}
+.res7 {
+	background-image: url(img/password.png);
+}
+.res8{
+	background-image: url('img/delete.png');
+}
+
+.res9
+{
+	background-image: url('img/questions.png');
+}
+
+.res10
+{
+	background-image:url('img/add2.png');
+}
+
+.res11
+{
+	background-image:url('img/finish.png');
+}
+.res12
+{
+	background-image:url('img/tick.png');
+}
+.res13
+{
+	background-image:url('img/error.png');
+}
+.res14
+{
+	background-color:black;
+}
+.res15
+{
+	background-image:url('img/sky.png');
+	background-size:100% 100%;	
+}
+.res16
+{
+	background-image:url('img/background.png') ;
+	background-size:100% 100%;
+	/*filter:alpha(opacity=50); -moz-opacity:0.5; -khtml-opacity: 0.5; opacity: 0.5;*/
+}
+.res17
+{
+	background-color:white;
+	filter:alpha(opacity=50); -moz-opacity:0.5; -khtml-opacity: 0.5; opacity: 0.5;
+}

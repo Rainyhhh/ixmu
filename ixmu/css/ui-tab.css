@@ -1,0 +1,57 @@
+.tab
+{
+	height:3.2em;
+}
+.header
+{
+	height:2.8em;
+}
+
+input[type="radio"]:checked + div.tab-act
+{
+	background-color:rgba(255,255,255,0.1) !important;
+	border-radius:0.3em;
+	border: 0px;
+	background-image: none;
+}
+
+input[type="radio"] + div>div.tp-account{
+	background-image: url(img/account2.png);
+}
+
+input[type="radio"]:checked + div>div.tp-account{
+	background-image: url(img/account3.png);
+}
+
+input[type="radio"] + div>div.tp-home{
+	background-image: url(img/home2.png) ;
+}
+
+input[type="radio"]:checked + div>div.tp-home{
+	background-image: url(img/home3.png);
+}
+
+
+input[type="radio"] + div>div.tp-life{
+	background-image: url(img/life2.png);
+}
+
+input[type="radio"]:checked + div>div.tp-life{
+	background-image: url(img/life3.png);
+}
+
+input[type="radio"] + div>div.tp-news{
+	background-image: url(img/news2.png);
+}
+
+input[type="radio"]:checked + div>div.tp-news{
+	background-image: url(img/news3.png);
+}
+
+input[type="radio"] + div>div.tp-app{
+	background-image: url(img/app2.png);
+}
+
+input[type="radio"]:checked + div>div.tp-app{
+	background-image: url(img/app3.png);
+}

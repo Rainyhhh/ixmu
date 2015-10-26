@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/ui-on.css">
+        <link rel="stylesheet" href="css/ui-res.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/ui-input.css">
+        <link rel="stylesheet" href="css/ui-list.css">
+        <link rel="stylesheet" href="css/ui-btn.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <script src="js/zy_control.js">
+        </script>
+        <script src="js/zy_click.js">
+        </script>
+		<script src="js/zy_json.js">
+		</script>
+    </head>
+    <body class="um-vp" style="padding:5%;" ontouchstart>
+        <h1 class="word_single">请输入你的反馈信息</h1>
+        <!--文本开始-->
+        <div class=" c-wh uc-a1 b-gra us-i uinput" onclick="clear()" style="margin-top:2%;">
+            <textarea id="reply" class="uc-a1" rows="6">
+            </textarea>
+        </div>
+        <!--文本结束--><h1 class="word_single">（不超过140字）</h1>
+        <!--按钮开始-->
+        <div ontouchstart="zy_touch('btn-act2')" class="btn  b-bla uinn5 c-blu2 c-m1 uc-a1 t-wh" onclick="submit()" style="margin-top:2%;">
+            提交
+        </div>
+        <!--按钮结束-->
+    </body>
+    <script>
+    	
+        zy_init();
+        window.uexOnload = function(type){
+            if (!type) {
+                uexWindow.setBounce("0");
+                uexWindow.showBounceView("0", "#FFF", "0");
+                uexWindow.showBounceView("1", "#FFF", "0");
+            }
+        }
+        function submit(){
+            if (/^\s*$/.test(document.getElementById("reply").value)) {
+				alert("内容不能为空！");
+				return;
+			}
+			var url='http://121.192.190.134:8080/IXiaDaManage/appmanager.do?action=addUserReply&&userid=1&&reply='+encodeURIComponent(document.getElementById("reply").value);
+			$.getJSON(url,function(data){
+				if(data.result=='suc'){
+					alert('谢谢您的反馈！');
+					document.getElementById("reply").value='';
+				}
+			})
+        }
+    </script>
+</html>

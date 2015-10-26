@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/ui-fold.css">
+        <link rel="stylesheet" href="css/ui-res.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/ui-input.css">
+        <link rel="stylesheet" href="css/ui-list.css">
+        <link rel="stylesheet" href="css/ui-btn.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/foundation-responsive.css">
+        <script src="js/zy_control.js">
+        </script>
+        <script src="js/zy_click.js">
+        </script>
+			<script src="js/zy_json.js">
+		</script>
+		<script src="js/zy_icache.js">
+		
+		</script>	
+		<script src="js/zy_tmpl.js">
+		
+		
+		</script>
+		<script src="js/ixiada_request.js"></script>
+		<script src='js/ixada_url_config.js'></script>
+    </head>
+    <body id="body1" class="um-vp " ontouchstart>	
+        <!--文本开始-->
+        <form onsubmit="search()" style="top:0;min-height:2em;">
+            <div class="t-bla ub  uc-a2 b-blu c-wh us-i uinput ub-rev uinn4" style="margin:1em 5%;">
+                <div class="res6 ub-img " style="min-width:2em;" onclick='search()'>
+                </div>
+                <div class="ub-f1 uinn1">
+                    <input id='keyword' placeholder="搜索" type="text" class="" style="background-color:white;">
+                </div>
+            </div>
+        </form><!--文本结束-->
+        <div id='categories' style="width:100%;"></div>
+    	<div id='searchResult' style=" width:100%;">
+    	</div>
+       
+    </body>
+    <script>
+    	var url_app='http://121.192.190.134:8080/IXiaDaManage/appmanager.do?action=getAppOfColumn&&columnname=';
+    	var url_cate='http://121.192.190.134:8080/IXiaDaManage/columnmanager.do?action=getAllColumn';
+    	var teml_cate='<div class=" uc-n b-gra">'+
+            '<input type="checkbox" class="uhide">'+
+            '<div ontouchstart="zy_touch(\'btn-act\')" onclick="zy_for(event,zy_fold);" class="col uc-n t-wh b-wh ub ub-ac c-blu2 umh5 ulev-1" style="border-top:1px solid;">'+
+                '<div class="ub-f1 ut-s" style="margin-left:5%;">'+
+                    '${columnname}'+
+                '</div>'+
+                '<div class="umh3 umw3 ub-img col-icon uc-a">'+
+                '</div>'+
+            '</div>'+
+            '<div class=" umh3 t-gra  us-i col-c">'+
+                
+               ' <div id="app${columnname}" class="ulev-1   t-gra" style="border:1px solid;">'+
+                    
+               ' </div><!--列表结束-->'+
+            '</div>'+
+        '</div>';
+		 var templ = '<div class="three columns" onclick="go(\'${appurl}\',\'${appname}\')">' +
+        '<div class="column-service-wrapper" >' +
+        '<div class="column-service-title-wrapper" align="center">' +
+        '<img name="image${iconpath}"  style="width:70%" src="${iconpath}"/><h2 class="img-word2">${appname}</h2>' +
+        '</div>' +
+        '</div>' +
+        '</div>';
+		var teml_app='<ul class="  ubb c-m1 ub b-gra ub-ac lis" >'+
+                        '<li class="lis-icon ub-img">'+
+                            '<img src="${iconpath}" style="width:80%;">'+
+                        '</li>'+
+                        '<li class="ub-f1 ut-s">'+
+                            '${appname}'+
+                        '</li>'+
+                        '<li class="tx-r ulev-1"  ontouchstart="zy_touch(\'btn-act\')" onclick="go(\'${appurl}\',\'${appname}\')">'+
+                            '<img src="css/img/right_arrow.png"/>'+
+                        '</li>'+
+                    '</ul>';
+					
+        zy_init();
+        window.uexOnload = function(type){
+            if (!type) {
+                uexWindow.setBounce("0");
+                uexWindow.showBounceView("0", "#FFF", "0");
+                uexWindow.showBounceView("1", "#FFF", "0");
+				zy_initcache(function(){
+					loadAppWithoutCache(url_cate,teml_cate,'categories');
+					  uexWindow.toast("1", "5", "加载中，请稍等...", "0");
+					$.getJSON('http://121.192.190.134:8080/IXiaDaManage/appmanager.do?action=searchAppByKey&&keyword=',function(data){
+						uexWindow.closeToast();
+						for (var v in data) {
+							
+							var s=zy_tmpl_s(teml_app,data[v],null);
+							 $$('app'+data[v].appcolumn).innerHTML = $$('app'+data[v].appcolumn).innerHTML + s;
+						}
+						
+					},'json',null,'POST','',false);
+				});
+				
+            }
+        }
+
+		 
+		function search(){
+			if(/^\s*$/.test(document.getElementById('keyword').value)){
+				document.getElementById('categories').style.display='';
+				document.getElementById('searchResult').style.display='none';
+				return;
+			}
+			document.getElementById('searchResult').style.display='';
+			document.getElementById('searchResult').innerHTML='';
+			document.getElementById('categories').style.display='none';
+			var searchurl=ixiada_search_app+encodeURIComponent(document.getElementById('keyword').value);
+			$.getJSON(searchurl,function(data){
+				if(data.result=='fail'){
+					$$('searchResult').innerHTML='<label style="padding:3%;">没有找到您要的应用(⊙ o ⊙ )</label>';
+					return;
+				}
+								
+				for (var v in data) {
+	       			var s = zy_tmpl_s(teml_app, data[v], function(a, b){});
+	        		document.getElementById('searchResult').innerHTML = document.getElementById('searchResult').innerHTML + s;
+	       			zy_imgcache('image' + data[v].iconpath, data[v].iconpath, data[v].iconpath, function(domobject, url){}, null);
+	    		}
+				
+			},'json', function(e){
+        		alert('加载失败，请查看您的网络连接');
+    		}, 'POST', '', false);
+		}
+    </script>
+</html>
